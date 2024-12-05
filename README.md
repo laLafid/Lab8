@@ -13,16 +13,13 @@
 # Struktur Kode
 
 ### Modul
-![alt text](gambar/tabul.png)
-
+```ruby
+from tabulate import tabulate 
+# modulnya harus ada
+```
 Program ini menggunakan modul Tabulate untuk menampilkan tabel data kepada pengguna.
 
-### Dictionary
-![alt text](gambar/dictionary.png)
-
-sebagai tempat untuk menyimpan setiap data yang diinputkan.
-
-### Fungsi-Fungsi
+### Meethod dan Fungsi
 ```ruby
 # fungsi ini menggunakan modul tabulate untuk mencetak table data
 def tabel(data, headers=None, title=""):
@@ -58,106 +55,142 @@ def tabel(data, headers=None, title=""):
         ))
 ```
 ```ruby
-# fungsi untuk memastikan input adalah angka
-# dan mengulangi permintaan jika input bukan angka
-# juga membatasi nilai input yang diinputkan.
-def nilai(str):
-    while True:
-        try:
-            poin = float(input(str))
-            if poin < 0 or poin > 100:
-                print(f"Nilai harus berkisar dari 0 hingga 100.")
-            else:
-                return poin
-        except ValueError:
-            print("Input harus berupa angka!!")    
+class mahasiswa:
+    def __init__(self, mahadata={}):
+    # inisialisasi class
+    # ada dictionary untuk simpan data nilai mahasiswa juga
+        self.m = mahadata
+```
+```ruby
+    def nilai(self, str):
+    # method untuk memastikan input adalah angka
+    # dan mengulangi permintaan jika input bukan angka
+    # juga untuk membatasi nilai input yang diinputkan.
+        while True:
+            try:
+                self.poin = float(input(str))
+                if self.poin < 0 or self.poin > 100:
+                    print(f"Nilai harus berkisar dari 0 hingga 100.")
+                else:
+                    return self.poin
+            except ValueError:
+                print("Input harus berupa angka!!")    
 ```
 ```ruby               
-# fungsi ini akan meminta input nama dari user
-# melihat apakah nama tersebut ada di dictionary atau tidak
-def namamu(str, harus_ada=True):
-    while True:
-        nama = input(str)
-        if harus_ada and nama not in mahadata:
-            print("nama tidak ditemukan!")
-        elif not harus_ada and nama in mahadata:
-            print("nama sudah ada di database. Masukkan nama lain!")
-        else:
-            return nama  
+    def namamu(self, str, harus_ada=True):
+    # method ini akan meminta input nama dari user
+    # dan melihat apakah nama yang diinputkan tersebut ada di dictionary atau tidak
+        while True:
+            self.nama = input(str)
+            if harus_ada and self.nama not in self.m:
+                print("nama tidak ditemukan!")
+            elif not harus_ada and self.nama in self.m:
+                print("nama sudah ada di database. Masukkan nama lain!")
+            else:
+                return self.nama  
 ```
 ```ruby         
-# fungsi minta input data``
-# gunanya untuk mendapatkan input dari user 
-# sekaligus melihat apakah data dengan nama yang sama ada di dictionary   
-def minta(nama):
-    tugas, uts, uas = map(nilai, [
-            "Masukkan Nilai Tugas: ", 
-            "Masukkan Nilai UTS: ", 
-            "Masukkan Nilai UAS: "
-            ])
-    akhir = (tugas*0.3) + (uts*0.35) + (uas*0.35)
-    if nama not in mahadata:
-        NIM = input("Masukkan NIM (e.g. 123456789): ")
-        return {
-            "Nama": nama,
-            "NIM": NIM,
-            "Nilai Tugas": tugas,
-            "Nilai UTS": uts,
-            "Nilai UAS": uas,
-            "Nilai Akhir": akhir
-        }
-    elif nama in mahadata:  
-    # ini di pakai jika nama yang diinputkan sudah aa di dalam dictionary mahadata 
-    # dibuat hanya untuk fungsi ubah() 
-        return {
-            "Nama": nama,
-            "NIM": mahadata[nama]["NIM"], # NIM dari data lama
-            "Nilai Tugas": tugas,
-            "Nilai UTS": uts,
-            "Nilai UAS": uas,
-            "Nilai Akhir": akhir
-        }
+    def minta(self, nama):
+    # method ini
+    # gunanya untuk mendapatkan input dari user
+        tugas, uts, uas = map(self.nilai, [
+                "Masukkan Nilai Tugas: ", 
+                "Masukkan Nilai UTS: ", 
+                "Masukkan Nilai UAS: "
+                ])
+        akhir = (tugas*0.3) + (uts*0.35) + (uas*0.35)
+        if nama not in self.m:
+            NIM = input("Masukkan NIM (e.g. 123456789): ")
+            return { # akan mengembalikan/menyerahkan data ke method yang memanggil
+                "Nama": nama,
+                "NIM": NIM,
+                "Nilai Tugas": tugas,
+                "Nilai UTS": uts,
+                "Nilai UAS": uas,
+                "Nilai Akhir": akhir
+            }
+        # sekaligus melihat apakah data dengan nama yang sama ada di dictionary
+        elif nama in self.m:
+            return { # lihat return diatas
+                "Nama": nama,
+                "NIM": self.m[nama]["NIM"], # NIM dari data lama
+                "Nilai Tugas": tugas,
+                "Nilai UTS": uts,
+                "Nilai UAS": uas,
+                "Nilai Akhir": akhir
+            }
 ```
 ```ruby  
-# fungsi yang akan menambahkan data yang sudah diterima fungsi minta
-# ke dalam dictionary
-def tambah():
-    nama = namamu("Masukkan Nama: ",harus_ada=False)
-    mahadata[nama] = minta(nama)
-    print("Data berhasil ditambahkan.")
+    def tambah(self):
+    # method ini akan menambahkan data yang sudah diterima oleh method minta
+    # ke dalam dictionary
+        self.nama = self.namamu("Masukkan Nama: ",harus_ada=False)
+        self.m[self.nama] = self.minta(self.nama)
+        print("Data berhasil ditambahkan.")
 ```  
 ```ruby
-# fungsi akan mencari data dengan nama yang sesuai
-# kemudian meminta input data baru
-# input tersebut akan menggantikan data yang sudah ada
-def ubah():
-    nama = namamu("Masukkan Nama: ")
-    mahadata[nama] = minta(nama)
-    print("Data berhasil diubah.")
+    def ubah(self):
+    # method akan mencari data dengan nama yang sesuai
+    # kemudian meminta input data baru
+    # input tersebut akan menggantikan data yang sudah ada
+        self.nama = self.namamu("Masukkan Nama: ")
+        # method namamu dipakai untuk membedakan antara method tambah dan ubah
+        # untuk konteks lihat method minta
+        self.m[self.nama] = self.minta(self.nama) 
+        print("Data berhasil diubah.")
 ```
 ```ruby    
-# fungsi ini gunanya untuk hapus data dari dictionary
-def hapus():
-    nama = namamu("Masukkan Nama: ")
-    del mahadata[nama]
-    print("Data berhasil dihapus.")
+    def hapus(self):
+    # method ini gunanya untuk hapus data dari dictionary
+        self.nama = self.namamu("Masukkan Nama: ")
+        # method namamu disini untuk memastikan bahwa nama yang diinput itu ada di dictionary
+        del self.m[self.nama]
+        print("Data berhasil dihapus.")
 ```
 ```ruby  
-# fungsi untuk menampilkan data yang ada di dictionary
-def lihat():
-    tb.tabel(mahadata, title="Data Mahasiswa") 
+    def lihat(self):
+    # method untuk menampilkan data yang ada di dictionary
+        tabel(self.m, title="Data Mahasiswa") 
 ```
 ```ruby
-# akan mencari dengan nama
-# data dengan nama tersebut akan ditamplikan kepada user
-def cari():
-    nama = namamu("Masukkan Nama: ")
-    tb.tabel({nama: mahadata[nama]}, title=f"Data Mahasiswa dengan Nama {nama}")
+    def cari(self):
+    # akan mencari dengan nama
+    # data dengan nama tersebut akan ditamplikan kepada user
+        self.nama = self.namamu("Masukkan Nama: ")
+        # method namamu sama seperti yang ada di method hapus
+        # untuk memastikan bahwa nama yang diinput itu ada di dictionary
+        tabel({self.nama: self.m[self.nama]}, title=f"Data Mahasiswa dengan Nama {self.nama}")
 ```
 
 
 ### Menu
-![alt text](gambar/iloopmenu.png)
+```ruby
+# ini juga dictionary
+# tugas nya adalah memamnggil method 
+menu = {
+    "1": a.lihat,   "l" : a.lihat,
+    "2": a.tambah,  "t" : a.tambah,
+    "3": a.ubah,    "u" : a.ubah,
+    "4": a.hapus,   "h" : a.hapus,
+    "5": a.cari,    "c" : a.cari,
+    "6": exit,      "k" : exit
+}
+# ini perulangan 
+while True:
+    print(
+        f"{p}L{r}ihat |", 
+        f"{h}T{r}ambah |", 
+        f"{b}U{r}bah |", 
+        f"{m}H{r}apus |", 
+        f"{k}C{r}ari |", 
+        f"{u}K{r}eluar"
+    )
+    opsi = input("Masukkan pilihan: ").lower()
+    if opsi in menu:
+        menu[opsi]()
+    else:
+        print("pilih yang ada saja.")
+```
 Program akan terus menampilkan menu kepada pengguna sampai opsi keluar di pilih. Setiap opsi akan memanggil fungsi yang sesuai.
 
 
@@ -167,19 +200,19 @@ Program akan terus menampilkan menu kepada pengguna sampai opsi keluar di pilih.
 
 
 ```Menampilkan tabel data```
-![alt text](gambar/tampilkan.png)
+![alt text](gambar/tampilk.png)
 
 
 ```Mengubah data```
-![alt text](gambar/tamhab.png)
+![alt text](gambar/ubah.png)
 
 
 ```Mencari```
-![alt text](gambar/maci.png)
+![alt text](gambar/cari.png)
  
 
 ```Menghapus data```
-![alt text](gambar/haappap.png)
+![alt text](gambar/hapus.png)
 
 
 ```Keluar```

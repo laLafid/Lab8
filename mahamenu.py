@@ -10,7 +10,7 @@ u = "\033[1;35m"
 p = "\033[1;37m"
 
 # ini juga dictionary
-# tugas nya memamnggil method yang dipanggil
+# tugas nya adalah memamnggil method 
 menu = {
     "1": a.lihat,   "l" : a.lihat,
     "2": a.tambah,  "t" : a.tambah,
