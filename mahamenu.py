@@ -17,7 +17,7 @@ menu = {
     "3": a.ubah,    "u" : a.ubah,
     "4": a.hapus,   "h" : a.hapus,
     "5": a.cari,    "c" : a.cari,
-    "6": exit,      "k" : exit
+    "6": exit(print("Program Selesai")),      "k" : exit(print("Program Selesai"))
 }
 
 # perulangan yang akan menampilkan menu pilihan
