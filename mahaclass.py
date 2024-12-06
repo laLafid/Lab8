@@ -1,4 +1,4 @@
-from mahatabel import tabel    
+from mahatabel import tabel as t   
 
 class mahasiswa:
     def __init__(self, mahadata={}):
@@ -81,14 +81,17 @@ class mahasiswa:
         print("Data berhasil dihapus.")
     def lihat(self):
     # method untuk menampilkan data yang ada di dictionary
-        tabel(self.m, title="Data Mahasiswa") 
+        t(self.m, title="Data Mahasiswa") 
     def cari(self):
     # akan mencari dengan nama
     # data dengan nama tersebut akan ditamplikan kepada user
         self.nama = self.namamu("Masukkan Nama: ")
         # method namamu sama seperti yang ada di method hapus
         # untuk memastikan bahwa nama yang diinput itu ada di dictionary
-        tabel({self.nama: self.m[self.nama]}, title=f"Data Mahasiswa dengan Nama {self.nama}")
+        t({self.nama: self.m[self.nama]}, title=f"Data Mahasiswa dengan Nama {self.nama}")
+    def exit(self):
+        print("Program selesai.")
+        exit()
 a = mahasiswa()
 
 class main:
@@ -101,7 +104,7 @@ class main:
             "3": a.ubah,    "u" : a.ubah,
             "4": a.hapus,   "h" : a.hapus,
             "5": a.cari,    "c" : a.cari,
-            "6": exit,      "k" : exit
+            "6": a.exit,    "k" : a.exit
         }
         # isinya adalah kode warna menggunakan ANSII escape
         r = "\033[0m"
