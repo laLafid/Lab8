@@ -8,9 +8,9 @@
 4. Mengulang langkah 2 sampai pengguna memilih opsi keluar.
 
 # Gambaran Flowchart
-![alt text](gambar/flwchrtp6.png)
+![alt text](gambar/flowchrt.png)
 
-# Struktur Kode
+# Struktur Program
 
 ### Modul
 ```ruby
@@ -19,7 +19,7 @@ from tabulate import tabulate
 ```
 Program ini menggunakan modul Tabulate untuk menampilkan tabel data kepada pengguna.
 
-### Meethod dan Fungsi
+### Method dan Fungsi
 ```ruby
 # fungsi ini menggunakan modul tabulate untuk mencetak table data
 def tabel(data, headers=None, title=""):
