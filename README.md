@@ -216,4 +216,4 @@ Program akan terus menampilkan menu kepada pengguna sampai opsi keluar di pilih.
 
 
 ```Keluar```
-![alt text](gambar/keluar.png)
+![alt text](gambar/kelu.png)
