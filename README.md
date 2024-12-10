@@ -7,7 +7,7 @@
 3. Memanggil fungsi yang sesuai dengan pilihan pengguna.
 4. Mengulang langkah 2 sampai pengguna memilih opsi keluar.
 
-# Gambaran Flowchart
+# Flowchart
 ![alt text](gambar/flowchrt.png)
 
 # Struktur Program
@@ -193,6 +193,8 @@ while True:
 ```
 Program akan terus menampilkan menu kepada pengguna sampai opsi keluar di pilih. Setiap opsi akan memanggil fungsi yang sesuai.
 
+# Diagram Kelas
+![alt text](<gambar/diagram klass.png>)
 
 # Output Dari Program Ini
 ```Menambahkan Data```
